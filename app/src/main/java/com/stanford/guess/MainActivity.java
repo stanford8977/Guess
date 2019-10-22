@@ -1,18 +1,29 @@
 package com.stanford.guess;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
+
+import java.util.Random;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
+
+
 
 public class MainActivity extends AppCompatActivity {
+
+    int secret = new Random().nextInt(10)+1;
+    private TextView number ;
+    private EditText guess;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,13 +31,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        number = findViewById(R.id.result);
+        guess = findViewById(R.id.gg);
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
             }
         });
     }
@@ -38,7 +49,22 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    @Override
+public  void button(View view){
+    int count =Integer.parseInt(guess.getText().toString());
+    if(count > secret) {
+      number.setText("smaller");
+
+    }
+    else if ( count < secret){
+       number.setText("bigger");
+
+    }
+    else if ( count == secret){
+        number.setText("bingo");
+}
+}
+
+        @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
