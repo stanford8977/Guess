@@ -6,12 +6,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.Random;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -24,6 +24,9 @@ public class MainActivity extends AppCompatActivity {
     private TextView number ;
     private EditText guess;
 
+    int counter;
+    private TextView counter1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         number = findViewById(R.id.result);
         guess = findViewById(R.id.gg);
+        counter1 = findViewById(R.id.frequency);
+        counter1.setText(counter + "");
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -51,16 +56,30 @@ public class MainActivity extends AppCompatActivity {
 
 public  void button(View view){
     int count =Integer.parseInt(guess.getText().toString());
+    counter++;
+    counter1.setText(counter+"");
     if(count > secret) {
-      number.setText("smaller");
+      new AlertDialog.Builder(MainActivity.this)
+              .setTitle("hahaha")
+              .setMessage("Smaller")
+              .setPositiveButton("OK",null)
+              .show();
 
     }
     else if ( count < secret){
-       number.setText("bigger");
+       new AlertDialog.Builder(MainActivity.this)
+               .setTitle("hahaha")
+               .setMessage("Bigger")
+               .setPositiveButton("OK",null)
+               .show();
 
     }
     else if ( count == secret){
-        number.setText("bingo");
+        new AlertDialog.Builder(MainActivity.this)
+                .setTitle("hahaha")
+                .setMessage("Bingo")
+                .setPositiveButton("OK",null)
+                .show();
 }
 }
 
